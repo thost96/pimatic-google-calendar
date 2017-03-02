@@ -1,0 +1,31 @@
+{ 
+  "name": "pimatic-google-calendar",
+  "description": "Interact with your google calendar in pimatic",
+  "author": "Thorsten Reichelt (thost96) <info@thorstenreichelt.de>",
+  "main": "google-calendar",
+  "files": [
+    "google-calendar.coffee",
+    "LICENSE.md",
+    "README.md",
+    "HISTORY.md", 
+    "google-calendar-config-schema.coffee",
+    "device-config-schema.coffee"    
+  ],
+  "version": "0.1.0",
+  "license": "GPL-2.0",
+  "homepage": "http://github.com/thost96/pimatic-google-calendar",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/thost96/pimatic-google-calendar.git"
+  },
+  "configSchema": "google-calendar-config-schema.coffee",
+  "dependencies": {
+  },
+  "peerDependencies": {
+    "pimatic": ">=0.8.0 <1.0.0"
+  },
+  "engines": {
+    "node": ">0.8.x",
+    "npm": ">1.1.x"
+  }
+}
