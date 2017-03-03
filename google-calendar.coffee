@@ -85,8 +85,21 @@ module.exports = (env) ->
             env.logger.error err
             reject err
           else
-            env.logger.debug events.items
+            #env.logger.debug events.items
             resolve events.items
+      )
+
+      @getColorIds = new Promise ( (resolve, reject) =>
+        calendar = google.calendar({ version: 'v3', auth: oauth2client })
+        calendar.colors.get {
+          auth: oauth2client
+        }, (err, colors) =>
+          if err
+            env.logger.error err
+            reject err
+          else
+            #env.logger.debug colors.event
+            resolve colors.event
       )
 
 

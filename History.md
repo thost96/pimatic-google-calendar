@@ -1,6 +1,9 @@
 # Release History
 
 * 20160303 >> v0.1.3
+	* implemented function for getting event colors
+
+* 20160303 >> v0.1.3
 	* added dateformat to dependencies for time calculation
 	* implemented function for getting events
 	
