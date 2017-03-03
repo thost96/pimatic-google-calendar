@@ -11,14 +11,9 @@ module.exports = (env) ->
   class GoogleCalendar extends env.plugins.Plugin
 
     init: (app, @framework, @config) =>
-      #env.logger.debug("Starting GoogleCalendar")
-
       @client_id      = @config.client_id 
       @client_secret  = @config.client_secret
       @redirect_url   = "urn:ietf:wg:oauth:2.0:oob"
-      #env.logger.debug @client_id
-      #env.logger.debug @client_secret
-
       @access_token   = @config.access_token
       @refresh_token  = @config.refresh_token
 
@@ -29,13 +24,11 @@ module.exports = (env) ->
       ) 
       #env.logger.debug @oauth2client
 
-      scopes = ['https://www.googleapis.com/auth/calendar']
-
+      scopes = ['https://www.googleapis.com/auth/calendar.readonly']
       url = oauth2client.generateAuthUrl({
         access_type: 'offline',
         scope: scopes
       })
-      #env.logger.debug url
 
       if @access_token != "" && @refresh_token != ""
         oauth2client.setCredentials({
@@ -49,7 +42,6 @@ module.exports = (env) ->
 
       app.get '/google/calendar', (req, res) =>
         if @access_token = "" && @refresh_token = ""
-          #env.logger.debug "tokens not ready"
           code = req.query['code']
           if !code 
             res.redirect url
@@ -70,7 +62,6 @@ module.exports = (env) ->
                 res.redirect '/'
             )
         else
-          #env.logger.debug "tokens already ready"
           res.redirect '/'     
 
       @getEvents = new Promise( (resolve, reject) =>
@@ -102,5 +93,19 @@ module.exports = (env) ->
             resolve colors.event
       )
 
+      @getCalendarIds = new Promise ( (resolve, reject) =>
+        calendar = google.calendar({ version: 'v3', auth: oauth2client })
+        calendar.calendarList.list {
+          auth: oauth2client
+          showDeleted: false
+        }, (err, calendars) =>
+          if err
+            env.logger.error err
+            reject err
+          else
+            #env.logger.debug calendars.items
+            resolve calendars.items
+      )
 
-  return new GoogleCalendar
+  plugin = new GoogleCalendar
+  return plugin

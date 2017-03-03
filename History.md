@@ -1,12 +1,17 @@
 # Release History
 
-* 20160303 >> v0.1.3
-	* implemented function for getting event colors
+* 20160303 >> v0.1.5
+	* fixed wrong version in History.md
+	* code cleanup
+	* implemented function to get calendar ids
+
+* 20160303 >> v0.1.4
+	* implemented function to get event colors
 
 * 20160303 >> v0.1.3
 	* added dateformat to dependencies for time calculation
-	* implemented function for getting events
-	
+	* implemented function to get events from primary calendar
+
 * 20160303 >> v0.1.2
 	* added googleapis to dependencies for authentication and access to the calendar api
 	* added url /google for further use of google apis
