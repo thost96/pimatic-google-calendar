@@ -18,12 +18,12 @@ The plugin has the following configuration properties:
 
 ## Setup 
 
-
+comming soon ...
 
 
 ## History
 
-See [Release History](https://github.com/thost96/pimatic-google-calendar/blob/master/HISTORY.md).
+See [Release History](https://github.com/thost96/pimatic-google-calendar/blob/master/History.md).
 
 ## License 
 
