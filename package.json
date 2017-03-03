@@ -1,4 +1,4 @@
-{ 
+{
   "name": "pimatic-google-calendar",
   "description": "Interact with your google calendar in pimatic",
   "author": "Thorsten Reichelt (thost96) <info@thorstenreichelt.de>",
@@ -7,9 +7,9 @@
     "google-calendar.coffee",
     "LICENSE.md",
     "README.md",
-    "HISTORY.md", 
+    "History.md",
     "google-calendar-config-schema.coffee",
-    "device-config-schema.coffee"    
+    "device-config-schema.coffee"
   ],
   "version": "0.1.0",
   "license": "GPL-2.0",
@@ -20,6 +20,7 @@
   },
   "configSchema": "google-calendar-config-schema.coffee",
   "dependencies": {
+    "googleapis": "^17.1.0"
   },
   "peerDependencies": {
     "pimatic": ">=0.8.0 <1.0.0"
