@@ -6,7 +6,8 @@ module.exports = (env) ->
   google = require 'googleapis'
   oauth2 = google.auth.OAuth2
 
-  
+  dateFormat = require 'dateformat'
+
   class GoogleCalendar extends env.plugins.Plugin
 
     init: (app, @framework, @config) =>
@@ -72,6 +73,21 @@ module.exports = (env) ->
           #env.logger.debug "tokens already ready"
           res.redirect '/'     
 
+      @getEvents = new Promise( (resolve, reject) =>
+        #env.logger.debug dateFormat(new Date(), "isoDateTime")
+        calendar = google.calendar({ version: 'v3', auth: oauth2client })
+        calendar.events.list {
+          calendarId: "primary"
+          auth: oauth2client
+          timeMin: dateFormat(new Date(), "isoDateTime")
+        }, (err, events) =>
+          if err
+            env.logger.error err
+            reject err
+          else
+            env.logger.debug events.items
+            resolve events.items
+      )
 
 
   return new GoogleCalendar
