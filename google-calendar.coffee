@@ -11,6 +11,32 @@ module.exports = (env) ->
   class GoogleCalendar extends env.plugins.Plugin
 
     init: (app, @framework, @config) =>
+
+      deviceClasses = [
+        CalendarScheduleView
+      ]
+      deviceConfigDef = require("./device-config-schema")
+      for deviceClass in deviceClasses      
+        do (deviceClass) =>
+          dcd = deviceConfigDef[deviceClass.name]
+          @framework.deviceManager.registerDeviceClass(deviceClass.name, {
+            configDef: dcd
+            createCallback: (config) =>  new deviceClass(config, @)
+          })
+
+      @framework.on "after init", =>
+        mobileFrontend = @framework.pluginManager.getPlugin 'mobile-frontend'
+        if mobileFrontend?
+          mobileFrontend.registerAssetFile 'js', "pimatic-google-calendar/ui/src/moment.min.js"
+          mobileFrontend.registerAssetFile 'js', "pimatic-google-calendar/ui/src/fullcalendar.min.js"
+          mobileFrontend.registerAssetFile 'css', "pimatic-google-calendar/ui/src/fullcalendar.min.css"
+          #Device classes
+          mobileFrontend.registerAssetFile 'js', "pimatic-google-calendar/ui/CalendarScheduleView.coffee"
+          mobileFrontend.registerAssetFile 'html', "pimatic-google-calendar/ui/CalendarScheduleView.html"
+        else
+          env.logger.warn "Google-Calendar could not find the mobile-frontend. No gui will be available"
+     
+      
       @client_id      = @config.client_id 
       @client_secret  = @config.client_secret
       @redirect_url   = "urn:ietf:wg:oauth:2.0:oob"
@@ -108,4 +134,44 @@ module.exports = (env) ->
       )
 
   plugin = new GoogleCalendar
+
+  class CalendarScheduleView extends env.devices.Device
+
+    attributes:
+      events:
+        type: "string"
+        description: "your calendar events"
+
+    template: "CalendarScheduleView"
+
+    constructor: (@config) ->
+      @id = @config.id
+      @name = @config.name
+
+      @events = plugin.getEvents.then( (events) =>
+        @e = []
+        #env.logger.debug events
+        for event in events
+          #env.logger.debug event.summary
+          #@e.summary = event.summary
+          #env.logger.debug event.colorId
+          #@e.colorId = event.colorId
+          unless event.start.dateTime
+            event.start = event.start.date            
+          else
+            event.start = event.start.dateTime
+          #env.logger.debug event.start
+          @e.push {title: "#{event.summary}", start: "#{event.start}"}
+        #console.log @e
+        @e
+      )   
+      setInterval(@getEvents, 60000)  
+      super(@config)
+
+    destroy: () ->
+      super()
+
+    getEvents: () -> Promise.resolve(@events)
+
+
   return plugin

@@ -1,5 +1,11 @@
 # Release History
 
+* 20160316 >> v0.1.6
+	* implemented deviceClass CalendarScheduleView
+	* added CalendarScheduleView to device-config-schema.coffee
+	* added custom template for CalendarScheduleView
+	* added dependencies for fullcalendar
+
 * 20160303 >> v0.1.5
 	* fixed wrong version in History.md
 	* code cleanup
