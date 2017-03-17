@@ -1,5 +1,9 @@
 # Release History
 
+* 20160318 >> v0.1.9
+	* implemented deviceClass CalendarMonthView
+	* added custom template for CalendarMonthView
+
 * 20160317 >> v0.1.8
 	* implemented deviceClass CalendarWeekView
 	* added custom template for CalendarWeekView

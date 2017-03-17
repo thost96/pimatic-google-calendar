@@ -16,6 +16,7 @@ module.exports = (env) ->
         CalendarScheduleView
         CalendarDayView
         CalendarWeekView
+        CalendarMonthView
       ]
       deviceConfigDef = require("./device-config-schema")
       for deviceClass in deviceClasses      
@@ -39,6 +40,8 @@ module.exports = (env) ->
           mobileFrontend.registerAssetFile 'html', "pimatic-google-calendar/ui/CalendarDayView.html"
           mobileFrontend.registerAssetFile 'js', "pimatic-google-calendar/ui/CalendarWeekView.coffee"
           mobileFrontend.registerAssetFile 'html', "pimatic-google-calendar/ui/CalendarWeekView.html"
+          mobileFrontend.registerAssetFile 'js', "pimatic-google-calendar/ui/CalendarMonthView.coffee"
+          mobileFrontend.registerAssetFile 'html', "pimatic-google-calendar/ui/CalendarMonthView.html"
         else
           env.logger.warn "Google-Calendar could not find the mobile-frontend. No gui will be available"
      
@@ -259,5 +262,46 @@ module.exports = (env) ->
       super()
 
     getEvents: () -> Promise.resolve(@events)
+
+  class CalendarMonthView extends env.devices.Device
+    
+    attributes:
+      events:
+        type: "string"
+        description: "your calendar events"
+
+    template: "CalendarMonthView"
+
+    constructor: (@config) ->
+      @id = @config.id
+      @name = @config.name
+
+      @events = plugin.getEvents.then( (events) =>
+        @e = []
+        #env.logger.debug events
+        for event in events
+          #env.logger.debug event.summary
+          #@e.summary = event.summary
+          #env.logger.debug event.colorId
+          #@e.colorId = event.colorId
+          #env.logger.debug event.start
+          start = ""
+          unless event.start.dateTime
+            start = event.start.date            
+          else
+            start = event.start.dateTime
+          #env.logger.debug event.start
+          @e.push {title: "#{event.summary}", start: "#{start}"}
+        #console.log @e
+        @e
+      )   
+      setInterval(@getEvents, 60000)  
+      super(@config)
+
+    destroy: () ->
+      super()
+
+    getEvents: () -> Promise.resolve(@events)
+
 
   return plugin
