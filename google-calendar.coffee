@@ -14,6 +14,7 @@ module.exports = (env) ->
 
       deviceClasses = [
         CalendarScheduleView
+        CalendarDayView
       ]
       deviceConfigDef = require("./device-config-schema")
       for deviceClass in deviceClasses      
@@ -33,6 +34,8 @@ module.exports = (env) ->
           #Device classes
           mobileFrontend.registerAssetFile 'js', "pimatic-google-calendar/ui/CalendarScheduleView.coffee"
           mobileFrontend.registerAssetFile 'html', "pimatic-google-calendar/ui/CalendarScheduleView.html"
+          mobileFrontend.registerAssetFile 'js', "pimatic-google-calendar/ui/CalendarDayView.coffee"
+          mobileFrontend.registerAssetFile 'html', "pimatic-google-calendar/ui/CalendarDayView.html"
         else
           env.logger.warn "Google-Calendar could not find the mobile-frontend. No gui will be available"
      
@@ -149,6 +152,44 @@ module.exports = (env) ->
       @name = @config.name
 
       @events = plugin.getEvents.then( (events) =>
+        @e = []
+        #env.logger.debug events
+        for event in events
+          #env.logger.debug event.summary
+          #@e.summary = event.summary
+          #env.logger.debug event.colorId
+          #@e.colorId = event.colorId
+          unless event.start.dateTime
+            event.start = event.start.date            
+          else
+            event.start = event.start.dateTime
+          #env.logger.debug event.start
+          @e.push {title: "#{event.summary}", start: "#{event.start}"}
+        #console.log @e
+        @e
+      )   
+      setInterval(@getEvents, 60000)  
+      super(@config)
+
+    destroy: () ->
+      super()
+
+    getEvents: () -> Promise.resolve(@events)
+
+
+  class CalendarDayView extends env.devices.Device
+    
+    attributes:
+      events:
+        type: "string"
+        description: "your calendar events"
+
+    template: "CalendarDayView"
+
+    constructor: (@config, @plugin) ->
+      @id = @config.id
+      @name = @config.name
+      @events = @plugin.getEvents.then( (events) ->
         @e = []
         #env.logger.debug events
         for event in events

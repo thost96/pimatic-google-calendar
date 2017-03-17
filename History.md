@@ -1,5 +1,11 @@
 # Release History
 
+* 20160317 >> v0.1.7
+	* fixed calendar header 
+	* implemented deviceClass CalendarDayView
+	* added custom template for CalendarDayView
+	* modified README.md
+
 * 20160316 >> v0.1.6
 	* implemented deviceClass CalendarScheduleView
 	* added CalendarScheduleView to device-config-schema.coffee

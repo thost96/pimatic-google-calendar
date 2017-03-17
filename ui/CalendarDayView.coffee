@@ -1,6 +1,6 @@
 $(document).on( "templateinit", (event) ->
 
-  class CalendarScheduleView extends pimatic.DeviceItem
+  class CalendarDayView extends pimatic.DeviceItem
 
     constructor: (data, @device) ->
       super(data, @device)
@@ -15,19 +15,19 @@ $(document).on( "templateinit", (event) ->
     afterRender: (elements) -> 
       super(elements)
 
-      @calendar = $(elements).find('.calendar-list')
+      @calendar = $(elements).find('.calendar-day')
       @calendar.fullCalendar
         header: {
           left: '',
           center: 'title',
           right: 'today,prev,next'
         },
-        defaultView: 'listMonth',
+        defaultView: 'agendaDay',
         eventLimit: true, 
-        events: @_showEvents()
+        events: @_showDailyEvents()
 
-    _showEvents: =>
+    _showDailyEvents: =>
       @getAttribute('events').value()
 
-  pimatic.templateClasses['CalendarScheduleView'] = CalendarScheduleView
+  pimatic.templateClasses['CalendarDayView'] = CalendarDayView
 )

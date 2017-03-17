@@ -5,6 +5,10 @@
 
 A pimatic plugin to interact with your google calendar.
 
+## Setup 
+
+comming soon ...
+
 ## Plugin Configuration
 	{
           "plugin": "google-calendar",
@@ -16,9 +20,8 @@ The plugin has the following configuration properties:
 |:------------------|:---------|:--------|:--------------------------------------------|
 | debug             | false    | Boolean | Debug mode. Writes debug messages to the pimatic log, if set to true |
 
-## Setup 
+## Device Configuration
 
-comming soon ...
 
 
 ## History
