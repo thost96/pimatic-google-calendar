@@ -1,5 +1,10 @@
 # Release History
 
+* 20160317 >> v0.1.8
+	* implemented deviceClass CalendarWeekView
+	* added custom template for CalendarWeekView
+	* fixed issue where no events where displayed in CalendarDayView
+
 * 20160317 >> v0.1.7
 	* fixed calendar header 
 	* implemented deviceClass CalendarDayView

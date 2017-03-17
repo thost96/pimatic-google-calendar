@@ -15,6 +15,7 @@ module.exports = (env) ->
       deviceClasses = [
         CalendarScheduleView
         CalendarDayView
+        CalendarWeekView
       ]
       deviceConfigDef = require("./device-config-schema")
       for deviceClass in deviceClasses      
@@ -36,6 +37,8 @@ module.exports = (env) ->
           mobileFrontend.registerAssetFile 'html', "pimatic-google-calendar/ui/CalendarScheduleView.html"
           mobileFrontend.registerAssetFile 'js', "pimatic-google-calendar/ui/CalendarDayView.coffee"
           mobileFrontend.registerAssetFile 'html', "pimatic-google-calendar/ui/CalendarDayView.html"
+          mobileFrontend.registerAssetFile 'js', "pimatic-google-calendar/ui/CalendarWeekView.coffee"
+          mobileFrontend.registerAssetFile 'html', "pimatic-google-calendar/ui/CalendarWeekView.html"
         else
           env.logger.warn "Google-Calendar could not find the mobile-frontend. No gui will be available"
      
@@ -159,12 +162,13 @@ module.exports = (env) ->
           #@e.summary = event.summary
           #env.logger.debug event.colorId
           #@e.colorId = event.colorId
+          start = ""
           unless event.start.dateTime
-            event.start = event.start.date            
+            start = event.start.date            
           else
-            event.start = event.start.dateTime
+            start = event.start.dateTime
           #env.logger.debug event.start
-          @e.push {title: "#{event.summary}", start: "#{event.start}"}
+          @e.push {title: "#{event.summary}", start: "#{start}"}
         #console.log @e
         @e
       )   
@@ -186,10 +190,11 @@ module.exports = (env) ->
 
     template: "CalendarDayView"
 
-    constructor: (@config, @plugin) ->
+    constructor: (@config) ->
       @id = @config.id
       @name = @config.name
-      @events = @plugin.getEvents.then( (events) ->
+
+      @events = plugin.getEvents.then( (events) =>
         @e = []
         #env.logger.debug events
         for event in events
@@ -197,15 +202,16 @@ module.exports = (env) ->
           #@e.summary = event.summary
           #env.logger.debug event.colorId
           #@e.colorId = event.colorId
+          start = ""
           unless event.start.dateTime
-            event.start = event.start.date            
+            start = event.start.date            
           else
-            event.start = event.start.dateTime
+            start = event.start.dateTime
           #env.logger.debug event.start
-          @e.push {title: "#{event.summary}", start: "#{event.start}"}
+          @e.push {title: "#{event.summary}", start: "#{start}"}
         #console.log @e
         @e
-      )   
+      )  
       setInterval(@getEvents, 60000)  
       super(@config)
 
@@ -214,5 +220,44 @@ module.exports = (env) ->
 
     getEvents: () -> Promise.resolve(@events)
 
+  class CalendarWeekView extends env.devices.Device
+    
+    attributes:
+      events:
+        type: "string"
+        description: "your calendar events"
+
+    template: "CalendarWeekView"
+
+    constructor: (@config) ->
+      @id = @config.id
+      @name = @config.name
+
+      @events = plugin.getEvents.then( (events) =>
+        @e = []
+        #env.logger.debug events
+        for event in events
+          #env.logger.debug event.summary
+          #@e.summary = event.summary
+          #env.logger.debug event.colorId
+          #@e.colorId = event.colorId
+          #env.logger.debug event.start
+          start = ""
+          unless event.start.dateTime
+            start = event.start.date            
+          else
+            start = event.start.dateTime
+          #env.logger.debug event.start
+          @e.push {title: "#{event.summary}", start: "#{start}"}
+        #console.log @e
+        @e
+      )  
+      setInterval(@getEvents, 60000)  
+      super(@config)
+
+    destroy: () ->
+      super()
+
+    getEvents: () -> Promise.resolve(@events)
 
   return plugin
