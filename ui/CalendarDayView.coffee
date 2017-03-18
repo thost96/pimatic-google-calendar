@@ -22,6 +22,8 @@ $(document).on( "templateinit", (event) ->
           center: 'title',
           right: 'today,prev,next'
         },
+        timeFormat: 'H:mm',
+        contentHeight: 430,
         defaultView: 'agendaDay',
         eventLimit: true, 
         events: @_showDailyEvents()

@@ -1,6 +1,13 @@
 # Release History
 
-* 20160318 >> v0.1.9
+* 20160318 >> v0.2.0
+	* improved event color in CalendarDayView, CalendarWeekView and CalendarMonthView
+	* set height of all device to a maximum of 500px
+	* added Setup and Todo section to README.md
+	* updated Plugin and Device section of README.md
+	* first commit to npm
+
+* 20160317 >> v0.1.9
 	* implemented deviceClass CalendarMonthView
 	* added custom template for CalendarMonthView
 

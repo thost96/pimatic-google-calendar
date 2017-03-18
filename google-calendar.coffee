@@ -33,6 +33,7 @@ module.exports = (env) ->
           mobileFrontend.registerAssetFile 'js', "pimatic-google-calendar/ui/src/moment.min.js"
           mobileFrontend.registerAssetFile 'js', "pimatic-google-calendar/ui/src/fullcalendar.min.js"
           mobileFrontend.registerAssetFile 'css', "pimatic-google-calendar/ui/src/fullcalendar.min.css"
+          mobileFrontend.registerAssetFile 'css', "pimatic-google-calendar/ui/styles.css"
           #Device classes
           mobileFrontend.registerAssetFile 'js', "pimatic-google-calendar/ui/CalendarScheduleView.coffee"
           mobileFrontend.registerAssetFile 'html', "pimatic-google-calendar/ui/CalendarScheduleView.html"

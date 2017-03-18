@@ -3,26 +3,82 @@
 [![npm version](https://badge.fury.io/js/pimatic-google-calendar.svg)](http://badge.fury.io/js/pimatic-google-calendar)
 [![dependencies status](https://david-dm.org/thost96/pimatic-google-calendar/status.svg)](https://david-dm.org/thost96/pimatic-google-calendar)
 
-A pimatic plugin to interact with your google calendar.
+A pimatic plugin to display and interact with your google calendar.
 
 ## Setup 
 
-comming soon ...
+ 1. Use this [wizard](https://console.developers.google.com/start/api?id=calendar) to create a project in the Google Developers Console and automatically turn on the API. Click **Continue**, then **Go to credentials** .
+ 2. On the left of the page, select **Credentials**, then at the top of the page, select the **OAuth consent screen** tab. Select an **Email address**, enter a **Product name** if not already set, and click the **Save** button.
+ 3. Select the **Credentials tab**, click the **Create credentials** button and select **OAuth client ID**.
+ 4. Select the application type **Other**, enter the name "pimatic-google-calendar", and click the **Create** button.
+ 5. Go to your Pimatic webinterface and open the **plugin page**. Under **Browse Plugins** search for google-calendar and click **install**.
+ 6. On the google-calendar settings page enter your **client id** and **client secret** from the Google Developers Console and click **save**.
+ 7. Restart Pimatic.
+ 8. Open http(s)://<pimatic-ip>/google/calendar and sign in with your Google Account and allow read access to your calendar. 
+ 9. Copy the code from the textbox
+10. Open http(s)://<pimatic-ip>/google/calendar?auth=<your copied code here>
+11. Restart Pimatic again. 
 
 ## Plugin Configuration
+
 	{
           "plugin": "google-calendar",
-          "debug": false
+          "client_id": "",
+          "client_secret": ""
     }
+
 The plugin has the following configuration properties:
 
 | Property          | Default  | Type    | Description                                 |
 |:------------------|:---------|:--------|:--------------------------------------------|
+| client_id         | -		   | String  | Your client id from the setup above |
+| client_secret     | -		   | String  | Your client secrect from the setup above |
+| access_token      | -		   | String  | automatically generated access token |
+| refresh_token     | -    	   | String  | automatically generated refresh token |
 | debug             | false    | Boolean | Debug mode. Writes debug messages to the pimatic log, if set to true |
 
 ## Device Configuration
+The following devices can be created: 
 
+#### CalendarScheduleView
 
+	{
+			"id": "",
+			"name": "",
+			"class": "CalendarScheduleView"			
+	}
+
+#### CalendarDayView
+
+	{
+			"id": "",			
+			"name": "",
+			"class": "CalendarDayView"
+	}
+
+#### CalendarWeekView
+
+	{
+			"id": "",			
+			"name": "",
+			"class": "CalendarWeekView"
+	}
+
+#### CalendarMonthView
+
+	{
+			"id": "",
+			"name": "",
+			"class": "CalendarMonthView"
+	}
+
+## ToDo
+
+* add screenshot from each device
+* add support for rules
+* add customization options for all devices
+* add locale support
+* implement event colors
 
 ## History
 
@@ -30,6 +86,6 @@ See [Release History](https://github.com/thost96/pimatic-google-calendar/blob/ma
 
 ## License 
 
-Copyright (c) 2016, Thorsten Reichelt. All rights reserved.
+Copyright (c) 2017, Thorsten Reichelt and contributors. All rights reserved.
 
 License: [GPL-2.0](https://github.com/thost96/pimatic-google-calendar/blob/master/LICENSE.md).
