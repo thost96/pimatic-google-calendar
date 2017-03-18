@@ -1,59 +1,63 @@
 # Release History
 
-* 20160318 >> v0.2.1
+* 20170318 >> v0.2.2
+	* fixed wrong year in History.md
+	* added image for each device
+
+* 20170318 >> v0.2.1
 	* minor fixes in README.md
 	* updated googleapis dependency
 	* fixed error "Error: No access or refresh token is set." at first startup
 
-* 20160318 >> v0.2.0
+* 20170318 >> v0.2.0
 	* improved event color in CalendarDayView, CalendarWeekView and CalendarMonthView
 	* set height of all device to a maximum of 500px
 	* added Setup and Todo section to README.md
 	* updated Plugin and Device section of README.md
 	* first commit to npm
 
-* 20160317 >> v0.1.9
+* 20170317 >> v0.1.9
 	* implemented deviceClass CalendarMonthView
 	* added custom template for CalendarMonthView
 
-* 20160317 >> v0.1.8
+* 20170317 >> v0.1.8
 	* implemented deviceClass CalendarWeekView
 	* added custom template for CalendarWeekView
 	* fixed issue where no events where displayed in CalendarDayView
 
-* 20160317 >> v0.1.7
+* 20170317 >> v0.1.7
 	* fixed calendar header 
 	* implemented deviceClass CalendarDayView
 	* added custom template for CalendarDayView
 	* modified README.md
 
-* 20160316 >> v0.1.6
+* 20170316 >> v0.1.6
 	* implemented deviceClass CalendarScheduleView
 	* added CalendarScheduleView to device-config-schema.coffee
 	* added custom template for CalendarScheduleView
 	* added dependencies for fullcalendar
 
-* 20160303 >> v0.1.5
+* 20170303 >> v0.1.5
 	* fixed wrong version in History.md
 	* code cleanup
 	* implemented function to get calendar ids
 
-* 20160303 >> v0.1.4
+* 20170303 >> v0.1.4
 	* implemented function to get event colors
 
-* 20160303 >> v0.1.3
+* 20170303 >> v0.1.3
 	* added dateformat to dependencies for time calculation
 	* implemented function to get events from primary calendar
 
-* 20160303 >> v0.1.2
+* 20170303 >> v0.1.2
 	* added googleapis to dependencies for authentication and access to the calendar api
 	* added url /google for further use of google apis
 	* added url /google/calendar for setup process
 	* implemented offline authentication
 	* added properties client_id, client_secret, access_token and refresh_token to google-calendar-config-schema.coffee
 
-* 20160303 >> v0.1.1
+* 20170303 >> v0.1.1
 	* fixed history link in readme
 
-* 20160302 >> v0.1.0
+* 20170302 >> v0.1.0
 	* initial release
