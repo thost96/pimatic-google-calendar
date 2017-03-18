@@ -44,27 +44,29 @@ module.exports = (env) ->
           mobileFrontend.registerAssetFile 'js', "pimatic-google-calendar/ui/CalendarMonthView.coffee"
           mobileFrontend.registerAssetFile 'html', "pimatic-google-calendar/ui/CalendarMonthView.html"
         else
-          env.logger.warn "Google-Calendar could not find the mobile-frontend. No gui will be available"
-     
+          env.logger.warn "Google-Calendar could not find the mobile-frontend. No gui will be available"   
       
       @client_id      = @config.client_id 
       @client_secret  = @config.client_secret
       @redirect_url   = "urn:ietf:wg:oauth:2.0:oob"
-      @access_token   = @config.access_token
-      @refresh_token  = @config.refresh_token
+      @access_token   = @config.access_token || ""
+      @refresh_token  = @config.refresh_token || ""
+      #console.log @access_token
+      #console.log @refresh_token
 
       oauth2client = new oauth2( 
         @client_id, 
         @client_secret, 
         @redirect_url
       ) 
-      #env.logger.debug @oauth2client
+      #env.logger.debug oauth2client
 
       scopes = ['https://www.googleapis.com/auth/calendar.readonly']
       url = oauth2client.generateAuthUrl({
         access_type: 'offline',
         scope: scopes
       })
+      #env.logger.debug url
 
       if @access_token != "" && @refresh_token != ""
         oauth2client.setCredentials({
@@ -77,9 +79,10 @@ module.exports = (env) ->
         res.redirect '/'
 
       app.get '/google/calendar', (req, res) =>
-        if @access_token = "" && @refresh_token = ""
+        if _.isEmpty(@access_token) && _.isEmpty(@refresh_token)
           code = req.query['code']
           if !code 
+            #env.logger.debug url
             res.redirect url
           else
             #env.logger.debug code 
@@ -90,7 +93,9 @@ module.exports = (env) ->
               else
                 #env.logger.debug tokens
                 @config.access_token  = tokens.access_token
+                @access_token = tokens.access_token
                 @config.refresh_token = tokens.refresh_token
+                @refresh_token = tokens.refresh_token
                 oauth2client.setCredentials(tokens)
                 google.options({
                   auth: oauth2client
@@ -102,45 +107,48 @@ module.exports = (env) ->
 
       @getEvents = new Promise( (resolve, reject) =>
         #env.logger.debug dateFormat(new Date(), "isoDateTime")
-        calendar = google.calendar({ version: 'v3', auth: oauth2client })
-        calendar.events.list {
-          calendarId: "primary"
-          auth: oauth2client
-          timeMin: dateFormat(new Date(), "isoDateTime")
-        }, (err, events) =>
-          if err
-            env.logger.error err
-            reject err
-          else
-            #env.logger.debug events.items
-            resolve events.items
+        if !_.isEmpty(@access_token) && !_.isEmpty(@refresh_token)
+          calendar = google.calendar({ version: 'v3', auth: oauth2client })
+          calendar.events.list {
+            calendarId: "primary"
+            auth: oauth2client
+            timeMin: dateFormat(new Date(), "isoDateTime")
+          }, (err, events) =>
+            if err
+              #env.logger.error err
+              reject err
+            else
+              #env.logger.debug events.items
+              resolve events.items
       )
 
       @getColorIds = new Promise ( (resolve, reject) =>
-        calendar = google.calendar({ version: 'v3', auth: oauth2client })
-        calendar.colors.get {
-          auth: oauth2client
-        }, (err, colors) =>
-          if err
-            env.logger.error err
-            reject err
-          else
-            #env.logger.debug colors.event
-            resolve colors.event
+        if !_.isEmpty(@access_token) && !_.isEmpty(@refresh_token)
+          calendar = google.calendar({ version: 'v3', auth: oauth2client })
+          calendar.colors.get {
+            auth: oauth2client
+          }, (err, colors) =>
+            if err
+              env.logger.error err
+              reject err
+            else
+              #env.logger.debug colors.event
+              resolve colors.event
       )
 
       @getCalendarIds = new Promise ( (resolve, reject) =>
-        calendar = google.calendar({ version: 'v3', auth: oauth2client })
-        calendar.calendarList.list {
-          auth: oauth2client
-          showDeleted: false
-        }, (err, calendars) =>
-          if err
-            env.logger.error err
-            reject err
-          else
-            #env.logger.debug calendars.items
-            resolve calendars.items
+        if !_.isEmpty(@access_token) && !_.isEmpty(@refresh_token)
+          calendar = google.calendar({ version: 'v3', auth: oauth2client })
+          calendar.calendarList.list {
+            auth: oauth2client
+            showDeleted: false
+          }, (err, calendars) =>
+            if err
+              env.logger.error err
+              reject err
+            else
+              #env.logger.debug calendars.items
+              resolve calendars.items
       )
 
   plugin = new GoogleCalendar
@@ -183,7 +191,6 @@ module.exports = (env) ->
       super()
 
     getEvents: () -> Promise.resolve(@events)
-
 
   class CalendarDayView extends env.devices.Device
     
@@ -303,6 +310,5 @@ module.exports = (env) ->
       super()
 
     getEvents: () -> Promise.resolve(@events)
-
 
   return plugin
