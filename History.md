@@ -1,10 +1,5 @@
 # Release History
 
-* 20160318 >> v0.2.1
-	* minor fixes in README.md
-	* updated googleapis dependency
-	* fixed error "Error: No access or refresh token is set." at first startup
-
 * 20160318 >> v0.2.0
 	* improved event color in CalendarDayView, CalendarWeekView and CalendarMonthView
 	* set height of all device to a maximum of 500px
