@@ -1,5 +1,8 @@
 # Release History
 
+* 20170321 >> v0.2.4
+	* moved device classes to seperate files
+
 * 20170321 >> v0.2.3
 	* fixed image urls in README.md
 

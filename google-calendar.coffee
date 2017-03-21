@@ -8,24 +8,27 @@ module.exports = (env) ->
 
   dateFormat = require 'dateformat'
 
+  deviceTypes = {}
+  for device in [
+    'CalendarScheduleView'
+    'CalendarDayView'
+    'CalendarWeekView'
+    'CalendarMonthView'
+  ]
+    className = device.replace /(^[a-z])|(\-[a-z])/g, ($1) -> $1.toUpperCase()
+    deviceTypes[className] = require('./devices/' + device)(env)
+
   class GoogleCalendar extends env.plugins.Plugin
 
     init: (app, @framework, @config) =>
 
-      deviceClasses = [
-        CalendarScheduleView
-        CalendarDayView
-        CalendarWeekView
-        CalendarMonthView
-      ]
       deviceConfigDef = require("./device-config-schema")
-      for deviceClass in deviceClasses      
-        do (deviceClass) =>
-          dcd = deviceConfigDef[deviceClass.name]
-          @framework.deviceManager.registerDeviceClass(deviceClass.name, {
-            configDef: dcd
-            createCallback: (config) =>  new deviceClass(config, @)
-          })
+      for className, classType of deviceTypes    
+        env.logger.debug "Registering device class #{className}"
+        @framework.deviceManager.registerDeviceClass(className, {
+          configDef: deviceConfigDef[className],
+          createCallback: @callbackHandler(className, classType)
+        })
 
       @framework.on "after init", =>
         mobileFrontend = @framework.pluginManager.getPlugin 'mobile-frontend'
@@ -151,164 +154,10 @@ module.exports = (env) ->
               resolve calendars.items
       )
 
-  plugin = new GoogleCalendar
+    callbackHandler: (className, classType) ->
+      # this closure is required to keep the className and classType context as part of the iteration
+      return (config) =>
+        return new classType(config, @)
 
-  class CalendarScheduleView extends env.devices.Device
 
-    attributes:
-      events:
-        type: "string"
-        description: "your calendar events"
-
-    template: "CalendarScheduleView"
-
-    constructor: (@config) ->
-      @id = @config.id
-      @name = @config.name
-
-      @events = plugin.getEvents.then( (events) =>
-        @e = []
-        #env.logger.debug events
-        for event in events
-          #env.logger.debug event.summary
-          #@e.summary = event.summary
-          #env.logger.debug event.colorId
-          #@e.colorId = event.colorId
-          start = ""
-          unless event.start.dateTime
-            start = event.start.date            
-          else
-            start = event.start.dateTime
-          #env.logger.debug event.start
-          @e.push {title: "#{event.summary}", start: "#{start}"}
-        #console.log @e
-        @e
-      )   
-      setInterval(@getEvents, 60000)  
-      super(@config)
-
-    destroy: () ->
-      super()
-
-    getEvents: () -> Promise.resolve(@events)
-
-  class CalendarDayView extends env.devices.Device
-    
-    attributes:
-      events:
-        type: "string"
-        description: "your calendar events"
-
-    template: "CalendarDayView"
-
-    constructor: (@config) ->
-      @id = @config.id
-      @name = @config.name
-
-      @events = plugin.getEvents.then( (events) =>
-        @e = []
-        #env.logger.debug events
-        for event in events
-          #env.logger.debug event.summary
-          #@e.summary = event.summary
-          #env.logger.debug event.colorId
-          #@e.colorId = event.colorId
-          start = ""
-          unless event.start.dateTime
-            start = event.start.date            
-          else
-            start = event.start.dateTime
-          #env.logger.debug event.start
-          @e.push {title: "#{event.summary}", start: "#{start}"}
-        #console.log @e
-        @e
-      )  
-      setInterval(@getEvents, 60000)  
-      super(@config)
-
-    destroy: () ->
-      super()
-
-    getEvents: () -> Promise.resolve(@events)
-
-  class CalendarWeekView extends env.devices.Device
-    
-    attributes:
-      events:
-        type: "string"
-        description: "your calendar events"
-
-    template: "CalendarWeekView"
-
-    constructor: (@config) ->
-      @id = @config.id
-      @name = @config.name
-
-      @events = plugin.getEvents.then( (events) =>
-        @e = []
-        #env.logger.debug events
-        for event in events
-          #env.logger.debug event.summary
-          #@e.summary = event.summary
-          #env.logger.debug event.colorId
-          #@e.colorId = event.colorId
-          #env.logger.debug event.start
-          start = ""
-          unless event.start.dateTime
-            start = event.start.date            
-          else
-            start = event.start.dateTime
-          #env.logger.debug event.start
-          @e.push {title: "#{event.summary}", start: "#{start}"}
-        #console.log @e
-        @e
-      )  
-      setInterval(@getEvents, 60000)  
-      super(@config)
-
-    destroy: () ->
-      super()
-
-    getEvents: () -> Promise.resolve(@events)
-
-  class CalendarMonthView extends env.devices.Device
-    
-    attributes:
-      events:
-        type: "string"
-        description: "your calendar events"
-
-    template: "CalendarMonthView"
-
-    constructor: (@config) ->
-      @id = @config.id
-      @name = @config.name
-
-      @events = plugin.getEvents.then( (events) =>
-        @e = []
-        #env.logger.debug events
-        for event in events
-          #env.logger.debug event.summary
-          #@e.summary = event.summary
-          #env.logger.debug event.colorId
-          #@e.colorId = event.colorId
-          #env.logger.debug event.start
-          start = ""
-          unless event.start.dateTime
-            start = event.start.date            
-          else
-            start = event.start.dateTime
-          #env.logger.debug event.start
-          @e.push {title: "#{event.summary}", start: "#{start}"}
-        #console.log @e
-        @e
-      )   
-      setInterval(@getEvents, 60000)  
-      super(@config)
-
-    destroy: () ->
-      super()
-
-    getEvents: () -> Promise.resolve(@events)
-
-  return plugin
+  return new GoogleCalendar
