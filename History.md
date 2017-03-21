@@ -1,5 +1,10 @@
 # Release History
 
+* 20170321 >> v0.2.6
+	* ouput calendar ids if debug output is enabled
+	* implemented destroy function for all devices
+	* cleaned up the device code
+
 * 20170321 >> v0.2.5
 	* added support for calendar id for each device
 	* cleaned up the code (remove unused code for now)

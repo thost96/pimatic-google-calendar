@@ -115,7 +115,6 @@ module.exports = (env) ->
               resolve colors.event
       )
       ###
-      ###
       @getCalendarIds = new Promise ( (resolve, reject) =>
         if !_.isEmpty(@access_token) && !_.isEmpty(@refresh_token)
           calendar = google.calendar({ version: 'v3', auth: @oauth2client })
@@ -127,17 +126,22 @@ module.exports = (env) ->
               env.logger.error err
               reject err
             else
-              #env.logger.debug calendars.items
-              resolve calendars.items
+              ids = []
+              for calendar in calendars.items
+                ids.push calendar.id
+              resolve ids
       )
-      ###
+      @getCalendarIds.then( (calendar_ids) ->
+        env.logger.debug "All possible calendar ids from your account:"
+        for calendar_id in calendar_ids
+          env.logger.debug calendar_id
+      )
 
     callbackHandler: (className, classType) ->
       return (config) =>
         return new classType(config, @)
 
     getEvents: (calendar_id) =>
-      env.logger.debug calendar_id
       return new Promise( (resolve, reject) =>
         oauth = @oauth2client
         if !_.isEmpty(@access_token) && !_.isEmpty(@refresh_token)
@@ -151,9 +155,7 @@ module.exports = (env) ->
               env.logger.error err
               reject err
             else
-              env.logger.debug events.items
               resolve events.items
       )
-
 
   return new GoogleCalendar

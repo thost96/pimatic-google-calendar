@@ -101,6 +101,9 @@ The device has the following configuration properties:
 |:------------------|:---------|:--------|:--------------------------------------------|
 | calendar_id       | "primary"| String  | id used to select a single calendar |
 
+
+If you don't know your calendar ids, set the debug option of the plugin to true. All availble ids will be logged. 
+
 ## ToDo
 
 * add support for multiple calendars

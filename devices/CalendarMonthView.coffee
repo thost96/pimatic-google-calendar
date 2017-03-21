@@ -14,6 +14,7 @@ module.exports = (env) ->
     constructor: (@config, @plugin) ->
       @id = @config.id
       @name = @config.name
+      @timers = []
       @calendar_id = @config.calendar_id
 
       @events = @plugin.getEvents(@calendar_id).then( (events) =>
@@ -35,10 +36,12 @@ module.exports = (env) ->
         #console.log @e
         @e
       )   
-      setInterval(@getEvents, 60000)  
+      @timers.push setInterval(@getEvents, 60000)  
       super(@config)
 
     destroy: () ->
+      for timerId in @timers
+        clearInterval timerId
       super()
 
     getEvents: () -> Promise.resolve(@events)
