@@ -12,7 +12,7 @@
     "google-calendar-config-schema.coffee",
     "device-config-schema.coffee"
   ],
-  "version": "0.2.1",
+  "version": "0.2.3",
   "license": "GPL-2.0",
   "homepage": "http://github.com/thost96/pimatic-google-calendar",
   "repository": {

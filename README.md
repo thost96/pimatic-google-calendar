@@ -42,7 +42,7 @@ The plugin has the following configuration properties:
 The following devices can be created: 
 
 #### CalendarScheduleView
-![CalendarScheduleView](https://github.com/thost96/pimatic-google-calendar/tree/master/assets/CalendarScheduleView.jpg)
+![CalendarScheduleView](https://github.com/thost96/pimatic-google-calendar/raw/master/assets/CalendarScheduleView.jpg)
 
 	{
 			"id": "",
@@ -51,7 +51,7 @@ The following devices can be created:
 	}
 
 #### CalendarDayView
-![CalendarDayView](https://github.com/thost96/pimatic-google-calendar/tree/master/assets/CalendarDayView.jpg)
+![CalendarDayView](https://github.com/thost96/pimatic-google-calendar/raw/master/assets/CalendarDayView.jpg)
 
 	{
 			"id": "",			
@@ -60,7 +60,7 @@ The following devices can be created:
 	}
 
 #### CalendarWeekView
-![CalendarWeekView](https://github.com/thost96/pimatic-google-calendar/tree/master/assets/CalendarWeekView.jpg)
+![CalendarWeekView](https://github.com/thost96/pimatic-google-calendar/raw/master/assets/CalendarWeekView.jpg)
 
 	{
 			"id": "",			
@@ -69,7 +69,7 @@ The following devices can be created:
 	}
 
 #### CalendarMonthView
-![CalendarMonthView](https://github.com/thost96/pimatic-google-calendar/tree/master/assets/CalendarMonthView.jpg)
+![CalendarMonthView](https://github.com/thost96/pimatic-google-calendar/raw/master/assets/CalendarMonthView.jpg)
 
 	{
 			"id": "",
@@ -79,12 +79,12 @@ The following devices can be created:
 
 ## ToDo
 
-* add screenshot from each device
 * add support for multiple calendars
 * add support for rules
 * add customization options for all devices
 * add locale support
 * implement event colors
+* use sweetAlert2 for setup
 
 ## History
 

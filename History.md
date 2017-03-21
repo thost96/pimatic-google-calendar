@@ -1,5 +1,8 @@
 # Release History
 
+* 20170321 >> v0.2.3
+	* fixed image urls in README.md
+
 * 20170318 >> v0.2.2
 	* fixed wrong year in History.md
 	* added image for each device
