@@ -14,8 +14,9 @@ module.exports = (env) ->
     constructor: (@config, @plugin) ->
       @id = @config.id
       @name = @config.name
+      @calendar_id = @config.calendar_id
 
-      @events = @plugin.getEvents.then( (events) =>
+      @events = @plugin.getEvents(@calendar_id).then( (events) =>
         @e = []
         #env.logger.debug events
         for event in events

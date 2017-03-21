@@ -1,5 +1,10 @@
 # Release History
 
+* 20170321 >> v0.2.5
+	* added support for calendar id for each device
+	* cleaned up the code (remove unused code for now)
+	* updated the device section of README.md
+
 * 20170321 >> v0.2.4
 	* moved device classes to seperate files
 

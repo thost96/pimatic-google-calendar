@@ -50,6 +50,12 @@ The following devices can be created:
 			"class": "CalendarScheduleView"
 	}
 
+The device has the following configuration properties:
+
+| Property          | Default  | Type    | Description                                 |
+|:------------------|:---------|:--------|:--------------------------------------------|
+| calendar_id       | "primary"| String  | id used to select a single calendar |
+
 #### CalendarDayView
 ![CalendarDayView](https://github.com/thost96/pimatic-google-calendar/raw/master/assets/CalendarDayView.jpg)
 
@@ -58,6 +64,12 @@ The following devices can be created:
 			"name": "",
 			"class": "CalendarDayView"
 	}
+
+The device has the following configuration properties:
+
+| Property          | Default  | Type    | Description                                 |
+|:------------------|:---------|:--------|:--------------------------------------------|
+| calendar_id       | "primary"| String  | id used to select a single calendar |
 
 #### CalendarWeekView
 ![CalendarWeekView](https://github.com/thost96/pimatic-google-calendar/raw/master/assets/CalendarWeekView.jpg)
@@ -68,6 +80,12 @@ The following devices can be created:
 			"class": "CalendarWeekView"
 	}
 
+The device has the following configuration properties:
+
+| Property          | Default  | Type    | Description                                 |
+|:------------------|:---------|:--------|:--------------------------------------------|
+| calendar_id       | "primary"| String  | id used to select a single calendar |
+
 #### CalendarMonthView
 ![CalendarMonthView](https://github.com/thost96/pimatic-google-calendar/raw/master/assets/CalendarMonthView.jpg)
 
@@ -76,6 +94,12 @@ The following devices can be created:
 			"name": "",
 			"class": "CalendarMonthView"
 	}
+
+The device has the following configuration properties:
+
+| Property          | Default  | Type    | Description                                 |
+|:------------------|:---------|:--------|:--------------------------------------------|
+| calendar_id       | "primary"| String  | id used to select a single calendar |
 
 ## ToDo
 
