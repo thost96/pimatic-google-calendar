@@ -17,7 +17,7 @@ A pimatic plugin to display and interact with your google calendar.
  8. Restart Pimatic again. 
  9. Open http(s)://pimatic-ip/google/calendar and sign in with your Google Account and allow read access to your calendar. 
 10. Copy the code from the textbox
-11. Open http(s)://pimatic-ip/google/calendar?auth="your copied code here"
+11. Open http(s)://pimatic-ip/google/calendar?code="your copied code here"
 12. Restart Pimatic again. 
 
 ## Plugin Configuration

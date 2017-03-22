@@ -1,5 +1,8 @@
 # Release History
 
+* 20170322 >> v0.2.7
+	* fixed package.json and README.md
+
 * 20170321 >> v0.2.6
 	* ouput calendar ids if debug output is enabled
 	* implemented destroy function for all devices
