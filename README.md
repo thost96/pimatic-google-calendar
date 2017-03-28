@@ -39,69 +39,14 @@ The plugin has the following configuration properties:
 | debug             | false    | Boolean | Debug mode. Writes debug messages to the pimatic log, if set to true |
 
 ## Device Configuration
-The following devices can be created: 
+The following device can be created: 
 
-#### CalendarScheduleView
-![CalendarScheduleView](https://github.com/thost96/pimatic-google-calendar/raw/master/assets/CalendarScheduleView.jpg)
-
-	{
-			"id": "",
-			"name": "",
-			"class": "CalendarScheduleView"
-	}
-
-The device has the following configuration properties:
-
-| Property          | Default  | Type    | Description                                 |
-|:------------------|:---------|:--------|:--------------------------------------------|
-| calendar_id       | "primary"| String  | id used to select a single calendar |
-| interval          | 60000    | Number  | interval for fetching events |
-| contentHeight     | 430      | Number  | content height in px |
-| timeFormat        | "H:mm"   | String  | time format, for more details see [here](https://fullcalendar.io/docs/text/timeFormat/) |
-
-#### CalendarDayView
-![CalendarDayView](https://github.com/thost96/pimatic-google-calendar/raw/master/assets/CalendarDayView.jpg)
-
-	{
-			"id": "",			
-			"name": "",
-			"class": "CalendarDayView"
-	}
-
-The device has the following configuration properties:
-
-| Property          | Default  | Type    | Description                                 |
-|:------------------|:---------|:--------|:--------------------------------------------|
-| calendar_id       | "primary"| String  | id used to select a single calendar |
-| interval          | 60000    | Number  | interval for fetching events |
-| contentHeight     | 430      | Number  | content height in px |
-| timeFormat        | "H:mm"   | String  | time format, for more details see [here](https://fullcalendar.io/docs/text/timeFormat/) |
-
-#### CalendarWeekView
-![CalendarWeekView](https://github.com/thost96/pimatic-google-calendar/raw/master/assets/CalendarWeekView.jpg)
-
-	{
-			"id": "",			
-			"name": "",
-			"class": "CalendarWeekView"
-	}
-
-The device has the following configuration properties:
-
-| Property          | Default  | Type    | Description                                 |
-|:------------------|:---------|:--------|:--------------------------------------------|
-| calendar_id       | "primary"| String  | id used to select a single calendar |
-| interval          | 60000    | Number  | interval for fetching events |
-| contentHeight     | 430      | Number  | content height in px |
-| timeFormat        | "H:mm"   | String  | time format, for more details see [here](https://fullcalendar.io/docs/text/timeFormat/) |
-
-#### CalendarMonthView
-![CalendarMonthView](https://github.com/thost96/pimatic-google-calendar/raw/master/assets/CalendarMonthView.jpg)
+#### CalendarDevice
 
 	{
 			"id": "",
 			"name": "",
-			"class": "CalendarMonthView"
+			"class": "CalendarDevice"
 	}
 
 The device has the following configuration properties:
@@ -109,12 +54,17 @@ The device has the following configuration properties:
 | Property          | Default  | Type    | Description                                 |
 |:------------------|:---------|:--------|:--------------------------------------------|
 | calendar_id       | "primary"| String  | id used to select a single calendar |
+| view 				| "month"  | String  | diffent views of the calendar eg. month, week, day or list |
 | interval          | 60000    | Number  | interval for fetching events |
 | contentHeight     | 430      | Number  | content height in px |
 | timeFormat        | "H:mm"   | String  | time format, for more details see [here](https://fullcalendar.io/docs/text/timeFormat/) |
-
 
 If you don't know your calendar ids, set the debug option of the plugin to true. All availble ids will be logged. 
+
+![ListView](https://github.com/thost96/pimatic-google-calendar/raw/master/assets/ListView.jpg)
+![DayView](https://github.com/thost96/pimatic-google-calendar/raw/master/assets/DayView.jpg)
+![WeekView](https://github.com/thost96/pimatic-google-calendar/raw/master/assets/WeekView.jpg)
+![MonthView](https://github.com/thost96/pimatic-google-calendar/raw/master/assets/MonthView.jpg)
 
 ## ToDo
 

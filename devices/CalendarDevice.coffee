@@ -2,14 +2,14 @@ module.exports = (env) ->
 
   Promise = env.require 'bluebird'
 
-  class CalendarMonthView extends env.devices.Device
+  class CalendarDevice extends env.devices.Device
     
     attributes:
       events:
         type: "string"
         description: "your calendar events"
 
-    template: "CalendarMonthView"
+    template: "CalendarDevice"
 
     constructor: (@config, @plugin) ->
       @id = @config.id
@@ -19,6 +19,7 @@ module.exports = (env) ->
       @interval = @config.interval
       @contentHeight = @config.contentHeight
       @timeFormat = @config.timeFormat 
+      @view = @config.view
 
       @events = @plugin.getEvents(@calendar_id).then( (events) =>
         @e = []

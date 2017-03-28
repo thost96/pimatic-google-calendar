@@ -2,32 +2,22 @@ module.exports = (env) ->
 
   Promise = env.require 'bluebird'
   _ = env.require 'lodash'
-  moment = env.require 'moment'
-  
+  moment = env.require 'moment'  
   google = require 'googleapis'
   oauth2 = google.auth.OAuth2
 
-  deviceTypes = {}
-  for device in [
-    'CalendarScheduleView'
-    'CalendarDayView'
-    'CalendarWeekView'
-    'CalendarMonthView'
-  ]
-    className = device.replace /(^[a-z])|(\-[a-z])/g, ($1) -> $1.toUpperCase()
-    deviceTypes[className] = require('./devices/' + device)(env)
+  CalendarDevice = require('./devices/CalendarDevice')(env)
 
   class GoogleCalendar extends env.plugins.Plugin
 
     init: (app, @framework, @config) =>
 
       deviceConfigDef = require("./device-config-schema")
-      for className, classType of deviceTypes    
-        env.logger.debug "Registering device class #{className}"
-        @framework.deviceManager.registerDeviceClass(className, {
-          configDef: deviceConfigDef[className],
-          createCallback: @callbackHandler(className, classType)
-        })
+      env.logger.debug "Registering device class CalendarDevice"
+      @framework.deviceManager.registerDeviceClass("CalendarDevice", {
+        configDef: deviceConfigDef.CalendarDevice,
+        createCallback: (config) => new CalendarDevice(config, @)
+      })
 
       @framework.on "after init", =>
         mobileFrontend = @framework.pluginManager.getPlugin 'mobile-frontend'
@@ -36,15 +26,9 @@ module.exports = (env) ->
           mobileFrontend.registerAssetFile 'js', "pimatic-google-calendar/ui/src/fullcalendar.min.js"
           mobileFrontend.registerAssetFile 'css', "pimatic-google-calendar/ui/src/fullcalendar.min.css"
           mobileFrontend.registerAssetFile 'css', "pimatic-google-calendar/ui/styles.css"
-          #Device classes
-          mobileFrontend.registerAssetFile 'js', "pimatic-google-calendar/ui/CalendarScheduleView.coffee"
-          mobileFrontend.registerAssetFile 'html', "pimatic-google-calendar/ui/CalendarScheduleView.html"
-          mobileFrontend.registerAssetFile 'js', "pimatic-google-calendar/ui/CalendarDayView.coffee"
-          mobileFrontend.registerAssetFile 'html', "pimatic-google-calendar/ui/CalendarDayView.html"
-          mobileFrontend.registerAssetFile 'js', "pimatic-google-calendar/ui/CalendarWeekView.coffee"
-          mobileFrontend.registerAssetFile 'html', "pimatic-google-calendar/ui/CalendarWeekView.html"
-          mobileFrontend.registerAssetFile 'js', "pimatic-google-calendar/ui/CalendarMonthView.coffee"
-          mobileFrontend.registerAssetFile 'html', "pimatic-google-calendar/ui/CalendarMonthView.html"
+          #Device class
+          mobileFrontend.registerAssetFile 'js', "pimatic-google-calendar/ui/CalendarDevice.coffee"
+          mobileFrontend.registerAssetFile 'html', "pimatic-google-calendar/ui/CalendarDevice.html"
         else
           env.logger.warn "Google-Calendar could not find the mobile-frontend. No gui will be available"   
       
@@ -135,10 +119,6 @@ module.exports = (env) ->
         for calendar_id in calendar_ids
           env.logger.debug calendar_id
       )
-
-    callbackHandler: (className, classType) ->
-      return (config) =>
-        return new classType(config, @)
 
     getEvents: (calendar_id) =>
       return new Promise( (resolve, reject) =>

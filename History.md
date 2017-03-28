@@ -1,5 +1,11 @@
 # Release History
 
+* 20170328 >> v0.3.0
+	* added CalendarDevice
+	* moved CalendarScheduleView, CalendarDayView, CalendarWeekView and CalendarMonthView into view property of CalendarDevice
+	* removed CalendarScheduleView, CalendarDayView, CalendarWeekView and CalendarMonthView files
+	* updated README.md
+
 * 20170328 >> v0.2.9
 	* added device customisation options (interval, timeFormat and contentHeight)
 	* updated README.md

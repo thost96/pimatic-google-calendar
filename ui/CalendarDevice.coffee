@@ -1,6 +1,6 @@
 $(document).on( "templateinit", (event) ->
 
-  class CalendarWeekView extends pimatic.DeviceItem
+  class CalendarDevice extends pimatic.DeviceItem
 
     constructor: (data, @device) ->
       super(data, @device)
@@ -8,7 +8,13 @@ $(document).on( "templateinit", (event) ->
       @name = @device.name
       @timeFormat = @device.config.timeFormat || @device.configDefaults.timeFormat
       @contentHeight = @device.config.contentHeight || @device.configDefaults.contentHeight
-      
+      @view = @device.config.view || @device.configDefaults.view
+      switch @view
+        when "month" then @defView = 'month'
+        when "week" then @defView = 'agendaWeek'
+        when "day" then @defView = 'agendaDay'
+        when "list" then @defView = 'listMonth'
+
       attribute = @getAttribute("events")
       @events = ko.observable attribute.value()
       attribute.value.subscribe (newValue) =>
@@ -17,7 +23,7 @@ $(document).on( "templateinit", (event) ->
     afterRender: (elements) -> 
       super(elements)
 
-      @calendar = $(elements).find('.calendar-week')
+      @calendar = $(elements).find('.calendar-device')
       @calendar.maxHeight = "#{@contentHeight + 70}px"
       @calendar.fullCalendar
         header: {
@@ -25,14 +31,14 @@ $(document).on( "templateinit", (event) ->
           center: 'title',
           right: 'today,prev,next'
         },
-        timeFormat: @timeFormat,
+        timeFormat: @timeFormat, 
         contentHeight: @contentHeight,
-        defaultView: 'agendaWeek',
+        defaultView: @defView,
         eventLimit: true, 
-        events: @_showWeekEvents()
+        events: @_showEvents()
 
-    _showWeekEvents: =>
+    _showEvents: =>
       @getAttribute('events').value()
 
-  pimatic.templateClasses['CalendarWeekView'] = CalendarWeekView
+  pimatic.templateClasses['CalendarDevice'] = CalendarDevice
 )

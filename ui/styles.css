@@ -1,15 +1,11 @@
-.calendar-day .fc-time-grid-event .fc-title,
-.calendar-day .fc-time-grid-event .fc-time,
-.calendar-week .fc-time-grid-event .fc-title,
-.calendar-week .fc-time-grid-event .fc-time,
-.calendar-month .fc-day-grid-event .fc-title,
-.calendar-month .fc-day-grid-event .fc-time
+.calendar-device .fc-time-grid-event .fc-title,
+.calendar-device .fc-time-grid-event .fc-time,
+.calendar-device .fc-day-grid-event .fc-title,
+.calendar-device .fc-day-grid-event .fc-time
 {
 	color: white;
 }
-.calendar-day .fc-event,
-.calendar-week .fc-event,
-.calendar-month .fc-event
+.calendar-device .fc-event
 {
 	background-color: rgb(0, 125, 205) !important;
 }
