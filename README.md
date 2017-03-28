@@ -55,6 +55,9 @@ The device has the following configuration properties:
 | Property          | Default  | Type    | Description                                 |
 |:------------------|:---------|:--------|:--------------------------------------------|
 | calendar_id       | "primary"| String  | id used to select a single calendar |
+| interval          | 60000    | Number  | interval for fetching events |
+| contentHeight     | 430      | Number  | content height in px |
+| timeFormat        | "H:mm"   | String  | time format, for more details see [here](https://fullcalendar.io/docs/text/timeFormat/) |
 
 #### CalendarDayView
 ![CalendarDayView](https://github.com/thost96/pimatic-google-calendar/raw/master/assets/CalendarDayView.jpg)
@@ -70,6 +73,9 @@ The device has the following configuration properties:
 | Property          | Default  | Type    | Description                                 |
 |:------------------|:---------|:--------|:--------------------------------------------|
 | calendar_id       | "primary"| String  | id used to select a single calendar |
+| interval          | 60000    | Number  | interval for fetching events |
+| contentHeight     | 430      | Number  | content height in px |
+| timeFormat        | "H:mm"   | String  | time format, for more details see [here](https://fullcalendar.io/docs/text/timeFormat/) |
 
 #### CalendarWeekView
 ![CalendarWeekView](https://github.com/thost96/pimatic-google-calendar/raw/master/assets/CalendarWeekView.jpg)
@@ -85,6 +91,9 @@ The device has the following configuration properties:
 | Property          | Default  | Type    | Description                                 |
 |:------------------|:---------|:--------|:--------------------------------------------|
 | calendar_id       | "primary"| String  | id used to select a single calendar |
+| interval          | 60000    | Number  | interval for fetching events |
+| contentHeight     | 430      | Number  | content height in px |
+| timeFormat        | "H:mm"   | String  | time format, for more details see [here](https://fullcalendar.io/docs/text/timeFormat/) |
 
 #### CalendarMonthView
 ![CalendarMonthView](https://github.com/thost96/pimatic-google-calendar/raw/master/assets/CalendarMonthView.jpg)
@@ -100,6 +109,9 @@ The device has the following configuration properties:
 | Property          | Default  | Type    | Description                                 |
 |:------------------|:---------|:--------|:--------------------------------------------|
 | calendar_id       | "primary"| String  | id used to select a single calendar |
+| interval          | 60000    | Number  | interval for fetching events |
+| contentHeight     | 430      | Number  | content height in px |
+| timeFormat        | "H:mm"   | String  | time format, for more details see [here](https://fullcalendar.io/docs/text/timeFormat/) |
 
 
 If you don't know your calendar ids, set the debug option of the plugin to true. All availble ids will be logged. 
@@ -108,7 +120,6 @@ If you don't know your calendar ids, set the debug option of the plugin to true.
 
 * add support for multiple calendars
 * add support for rules
-* add customization options for all devices
 * add locale support
 * implement event colors
 * use sweetAlert2 for setup

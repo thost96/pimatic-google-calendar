@@ -1,5 +1,9 @@
 # Release History
 
+* 20170328 >> v0.2.9
+	* added device customisation options (interval, timeFormat and contentHeight)
+	* updated README.md
+
 * 20170328 >> v0.2.8
 	* replace dateFormat with momentjs
 	* removed dateFormat dependency

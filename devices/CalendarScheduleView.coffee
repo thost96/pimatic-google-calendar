@@ -16,6 +16,9 @@ module.exports = (env) ->
       @name = @config.name
       @timers = []
       @calendar_id = @config.calendar_id
+      @interval = @config.interval
+      @contentHeight = @config.contentHeight
+      @timeFormat = @config.timeFormat 
 
       @events = @plugin.getEvents(@calendar_id).then( (events) =>
         @e = []
@@ -28,7 +31,7 @@ module.exports = (env) ->
           @e.push {title: "#{event.summary}", start: "#{start}"}
         @e
       )   
-      @timers.push setInterval(@getEvents, 60000)  
+      @timers.push setInterval(@getEvents, @interval)  
       super(@config)
 
     destroy: () ->
