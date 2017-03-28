@@ -4,17 +4,17 @@
   "author": "Thorsten Reichelt (thost96) <info@thorstenreichelt.de>",
   "main": "google-calendar",
   "files": [
-    "ui/",
     "assets/",
     "devices/",
-    "google-calendar.coffee",
-    "LICENSE.md",
-    "README.md",
-    "History.md",
+    "ui/",
+    "device-config-schema.coffee",
     "google-calendar-config-schema.coffee",
-    "device-config-schema.coffee"
+    "google-calendar.coffee",
+    "History.md",
+    "LICENSE.md",
+    "README.md"
   ],
-  "version": "0.2.7",
+  "version": "0.2.8",
   "license": "GPL-2.0",
   "homepage": "http://github.com/thost96/pimatic-google-calendar",
   "repository": {
@@ -23,7 +23,6 @@
   },
   "configSchema": "google-calendar-config-schema.coffee",
   "dependencies": {
-    "dateformat": "^2.0.0",
     "googleapis": "^18.0.0"
   },
   "peerDependencies": {

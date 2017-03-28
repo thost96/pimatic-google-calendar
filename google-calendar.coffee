@@ -2,11 +2,10 @@ module.exports = (env) ->
 
   Promise = env.require 'bluebird'
   _ = env.require 'lodash'
+  moment = env.require 'moment'
   
   google = require 'googleapis'
   oauth2 = google.auth.OAuth2
-
-  dateFormat = require 'dateformat'
 
   deviceTypes = {}
   for device in [
@@ -149,7 +148,7 @@ module.exports = (env) ->
           calendar.events.list {
             calendarId: "#{calendar_id}"
             auth: oauth
-            timeMin: dateFormat(new Date(), "isoDateTime")
+            timeMin: moment().format()
           }, (err, events) =>
             if err
               env.logger.error err

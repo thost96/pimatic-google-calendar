@@ -1,5 +1,9 @@
 # Release History
 
+* 20170328 >> v0.2.8
+	* replace dateFormat with momentjs
+	* removed dateFormat dependency
+
 * 20170322 >> v0.2.7
 	* fixed package.json and README.md
 
