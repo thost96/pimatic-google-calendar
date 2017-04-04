@@ -20,5 +20,9 @@ module.exports = {
       timeFormat:
         type: "string"
         default: "H:mm"
+      firstDayOfWeek:
+        type: "string"
+        default: "sunday"
+        enum: ["sunday", "monday"]
     }
 }

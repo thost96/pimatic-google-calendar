@@ -20,6 +20,7 @@ module.exports = (env) ->
       @contentHeight = @config.contentHeight
       @timeFormat = @config.timeFormat 
       @view = @config.view
+      @firstDayOfWeek = @config.firstDayOfWeek
 
       @events = @plugin.getEvents(@calendar_id).then( (events) =>
         @e = []

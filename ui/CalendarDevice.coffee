@@ -14,6 +14,10 @@ $(document).on( "templateinit", (event) ->
         when "week" then @defView = 'agendaWeek'
         when "day" then @defView = 'agendaDay'
         when "list" then @defView = 'listMonth'
+      @firstDayOfWeek = @device.config.firstDayOfWeek || @device.configDefaults.firstDayOfWeek
+      switch @firstDayOfWeek
+        when "sunday" then (Number) @firstDay = 0
+        when "monday" then (Number) @firstDay = 1
 
       attribute = @getAttribute("events")
       @events = ko.observable attribute.value()
@@ -31,6 +35,7 @@ $(document).on( "templateinit", (event) ->
           center: 'title',
           right: 'today,prev,next'
         },
+        firstDay: @firstDay,
         timeFormat: @timeFormat, 
         contentHeight: @contentHeight,
         defaultView: @defView,

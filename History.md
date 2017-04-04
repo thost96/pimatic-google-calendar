@@ -1,5 +1,8 @@
 # Release History
 
+* 20170404 >> v0.3.1
+	* added property to set the first day of week to sunday or monday of CalendarDevice
+
 * 20170328 >> v0.3.0
 	* added CalendarDevice
 	* moved CalendarScheduleView, CalendarDayView, CalendarWeekView and CalendarMonthView into view property of CalendarDevice
