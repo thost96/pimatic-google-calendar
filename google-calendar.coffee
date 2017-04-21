@@ -2,7 +2,6 @@ module.exports = (env) ->
 
   Promise = env.require 'bluebird'
   _ = env.require 'lodash'
-  moment = env.require 'moment'  
   google = require 'googleapis'
   oauth2 = google.auth.OAuth2
 
@@ -128,7 +127,6 @@ module.exports = (env) ->
           calendar.events.list {
             calendarId: "#{calendar_id}"
             auth: oauth
-            timeMin: moment().format()
           }, (err, events) =>
             if err
               env.logger.error err

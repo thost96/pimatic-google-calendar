@@ -1,5 +1,8 @@
 # Release History
 
+* 20170421 >> v0.3.2
+	* removed time limit for last events
+
 * 20170404 >> v0.3.1
 	* added property to set the first day of week to sunday or monday of CalendarDevice
 
