@@ -1,5 +1,9 @@
 # Release History
 
+* 20170423 >> v0.3.5
+	* fixed pulling events using interval
+	* cleaned up the code
+
 * 20170423 >> v0.3.4
 	* updated dependency googleapis@18.0.0 to 19.0.0
 

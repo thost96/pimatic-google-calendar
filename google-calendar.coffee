@@ -82,8 +82,14 @@ module.exports = (env) ->
         else
           res.redirect '/'     
 
-      ###
-      @getColorIds = new Promise ( (resolve, reject) =>
+      @getCalendarIds().then( (calendar_ids) ->
+        env.logger.debug "All possible calendar ids from your account:"
+        for calendar_id in calendar_ids
+          env.logger.debug calendar_id
+      )
+
+    getColorIds: () =>
+      return new Promise ( (resolve, reject) =>
         if !_.isEmpty(@access_token) && !_.isEmpty(@refresh_token)
           calendar = google.calendar({ version: 'v3', auth: @oauth2client })
           calendar.colors.get {
@@ -93,11 +99,12 @@ module.exports = (env) ->
               env.logger.error err
               reject err
             else
-              #env.logger.debug colors.event
-              resolve colors.event
+              env.logger.debug colors
+              resolve colors
       )
-      ###
-      @getCalendarIds = new Promise ( (resolve, reject) =>
+
+    getCalendarIds: () =>
+      return new Promise ( (resolve, reject) =>
         if !_.isEmpty(@access_token) && !_.isEmpty(@refresh_token)
           calendar = google.calendar({ version: 'v3', auth: @oauth2client })
           calendar.calendarList.list {
@@ -112,21 +119,15 @@ module.exports = (env) ->
               for calendar in calendars.items
                 ids.push calendar.id
               resolve ids
-      )
-      @getCalendarIds.then( (calendar_ids) ->
-        env.logger.debug "All possible calendar ids from your account:"
-        for calendar_id in calendar_ids
-          env.logger.debug calendar_id
-      )
+      )      
 
     getEvents: (calendar_id) =>
       return new Promise( (resolve, reject) =>
-        oauth = @oauth2client
         if !_.isEmpty(@access_token) && !_.isEmpty(@refresh_token)
-          calendar = google.calendar({ version: 'v3', auth: oauth })
+          calendar = google.calendar({ version: 'v3', auth: @oauth2client })
           calendar.events.list {
             calendarId: "#{calendar_id}"
-            auth: oauth
+            auth: @oauth2client
             showDeleted: false
           }, (err, events) =>
             if err
