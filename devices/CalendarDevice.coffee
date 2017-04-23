@@ -26,18 +26,19 @@ module.exports = (env) ->
         @e = []
         #env.logger.debug events
         for event in events
-          #env.logger.debug event.summary
-          #@e.summary = event.summary
-          #env.logger.debug event.colorId
-          #@e.colorId = event.colorId
-          #env.logger.debug event.start
-          start = ""
-          unless event.start.dateTime
-            start = event.start.date            
-          else
-            start = event.start.dateTime
-          #env.logger.debug event.start
-          @e.push {title: "#{event.summary}", start: "#{start}"}
+          if event.status is 'confirmed'
+            #env.logger.debug event.summary
+            #@e.summary = event.summary
+            #env.logger.debug event.colorId
+            #@e.colorId = event.colorId
+            #env.logger.debug event.start
+            start = ""
+            unless event.start.dateTime
+              start = event.start.date            
+            else
+              start = event.start.dateTime
+            #env.logger.debug event.start
+            @e.push {title: "#{event.summary}", start: "#{start}"}
         #console.log @e
         @e
       )   

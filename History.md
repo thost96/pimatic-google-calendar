@@ -1,5 +1,10 @@
 # Release History
 
+* 20170423 >> v0.3.3
+	* fixed version v0.3.2
+	* added showDeleted=false to reduce of amount events pulled
+	* only showing confirmed events in calendar devices
+
 * 20170421 >> v0.3.2
 	* removed time limit for last events
 

@@ -127,6 +127,7 @@ module.exports = (env) ->
           calendar.events.list {
             calendarId: "#{calendar_id}"
             auth: oauth
+            showDeleted: false
           }, (err, events) =>
             if err
               env.logger.error err
