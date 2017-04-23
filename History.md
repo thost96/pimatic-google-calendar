@@ -1,5 +1,8 @@
 # Release History
 
+* 20170423 >> v0.3.4
+	* updated dependency googleapis@18.0.0 to 19.0.0
+
 * 20170423 >> v0.3.3
 	* fixed version v0.3.2
 	* added showDeleted=false to reduce of amount events pulled
