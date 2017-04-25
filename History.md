@@ -1,5 +1,8 @@
 # Release History
 
+* 20170425 >> v0.3.6
+	* added end property for events
+
 * 20170423 >> v0.3.5
 	* fixed pulling events using interval
 	* cleaned up the code

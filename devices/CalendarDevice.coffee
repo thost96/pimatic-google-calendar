@@ -36,13 +36,18 @@ module.exports = (env) ->
       @events = @plugin.getEvents(@calendar_id).then( (events) =>
         @e = []
         for event in events
-          if event.status is 'confirmed'
+          if event.status is 'confirmed'            
             start = ""
             unless event.start.dateTime
               start = event.start.date            
             else
               start = event.start.dateTime
-            @e.push {title: "#{event.summary}", start: "#{start}"}
+            end = ""
+            unless event.end.dateTime
+              end = event.end.date
+            else
+              end = event.end.dateTime
+            @e.push {title: "#{event.summary}", start: "#{start}", end: "#{end}"}
         @e
       )  
       Promise.resolve(@events)
