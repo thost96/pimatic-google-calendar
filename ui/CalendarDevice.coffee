@@ -18,6 +18,7 @@ $(document).on( "templateinit", (event) ->
       switch @firstDayOfWeek
         when "sunday" then (Number) @firstDay = 0
         when "monday" then (Number) @firstDay = 1
+      @locale = @device.config.locale
 
       attribute = @getAttribute("events")
       @events = ko.observable attribute.value()
@@ -35,6 +36,7 @@ $(document).on( "templateinit", (event) ->
           center: 'title',
           right: 'today,prev,next'
         },
+        locale: @locale,
         firstDay: @firstDay,
         timeFormat: @timeFormat, 
         contentHeight: @contentHeight,

@@ -24,5 +24,9 @@ module.exports = {
         type: "string"
         default: "sunday"
         enum: ["sunday", "monday"]
+      locale:
+        type: "string"
+        description: "automatically set to pimatic locale via plugin"
+        required: false
     }
 }

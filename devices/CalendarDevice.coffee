@@ -21,7 +21,8 @@ module.exports = (env) ->
       @timeFormat = @config.timeFormat 
       @view = @config.view
       @firstDayOfWeek = @config.firstDayOfWeek
-
+      @config.locale = @plugin.framework.config.settings.locale
+        
       @events = null
       @getEvents()
       @timers.push setInterval(@getEvents, @interval)  

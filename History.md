@@ -1,5 +1,8 @@
 # Release History
 
+* 20170426 >> v0.3.7
+	* added locale support (locale is automatically set using the pimatic local setting (default en))
+
 * 20170425 >> v0.3.6
 	* added end property for events
 
