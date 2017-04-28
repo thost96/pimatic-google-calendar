@@ -1,5 +1,9 @@
 # Release History
 
+* 20170428 >> v0.3.9
+	* added warn output for pulling events
+	* reduced error rate for fetching events if calendar_id has leading or trailing space
+
 * 20170428 >> v0.3.8
 	* moved event pulling to seperate function
 

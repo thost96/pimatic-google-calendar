@@ -1,6 +1,7 @@
 module.exports = (env) ->
 
   Promise = env.require 'bluebird'
+  _ = env.require 'lodash'
 
   class CalendarDevice extends env.devices.Device
     
@@ -32,7 +33,7 @@ module.exports = (env) ->
       super()
 
     resolveEvents: () =>      
-      @events = @plugin.getEvents(@calendar_id).then( (events) =>
+      @events = @plugin.getEvents(_.trim(@calendar_id)).then( (events) =>
         @e = []
         for event in events
           if event.status is 'confirmed'            
@@ -48,6 +49,8 @@ module.exports = (env) ->
               end = event.end.dateTime
             @e.push {title: "#{event.summary}", start: "#{start}", end: "#{end}"}
         @e
+      ).catch( (warn) ->
+        env.logger.warn warn
       )
       @getEvents()
 
