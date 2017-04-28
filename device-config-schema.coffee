@@ -3,9 +3,12 @@ module.exports = {
     title: "CalendarDevice config options"
     type: "object"
     properties: {
-      calendar_id:
-        type: "string"
-        default: "primary"
+      calendar_ids:
+        type: "array"
+        default: ["primary"]
+        format: "table"
+        items:
+          type: "string"
       view:
         type: "string"
         default: "month"

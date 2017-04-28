@@ -1,5 +1,10 @@
 # Release History
 
+* 20170428 >> v0.4.0
+	* added support for multiple calendars
+	* updated README.md
+	* changed CalendarDevice property calendar_id to calendar_ids (for more see device-config-schema)
+
 * 20170428 >> v0.3.9
 	* added warn output for pulling events
 	* reduced error rate for fetching events if calendar_id has leading or trailing space

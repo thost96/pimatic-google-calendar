@@ -51,15 +51,15 @@ The following device can be created:
 
 The device has the following configuration properties:
 
-| Property          | Default  | Type    | Description                                 |
-|:------------------|:---------|:--------|:--------------------------------------------|
-| calendar_id       | "primary"| String  | id used to select a single calendar |
-| view 				| "month"  | String  | diffent views of the calendar eg. month, week, day or list |
-| interval          | 60000    | Number  | interval for fetching events |
-| contentHeight     | 430      | Number  | content height in px |
-| timeFormat        | "H:mm"   | String  | time format, for more details see [here](https://fullcalendar.io/docs/text/timeFormat/) |
-| firstDayOfWeek	| "sunday" | String  | first day of week (sunday or monday) |
-| locale			| -	       | String  | automatically set locale from pimatic locale setting in config.json. Default pimatic locale is "en" |
+| Property          | Default    | Type    | Description                                 |
+|:------------------|:-----------|:--------|:--------------------------------------------|
+| calendar_ids      | ["primary"]| Array   | calendar ids used to fetch events |
+| view 				| "month"    | String  | diffent views of the calendar eg. month, week, day or list |
+| interval          | 60000      | Number  | interval for fetching events |
+| contentHeight     | 430        | Number  | content height in px |
+| timeFormat        | "H:mm"     | String  | time format, for more details see [here](https://fullcalendar.io/docs/text/timeFormat/) |
+| firstDayOfWeek	| "sunday"   | String  | first day of week (sunday or monday) |
+| locale			| -	         | String  | automatically set locale from pimatic locale setting in config.json. Default pimatic locale is "en" |
 
 If you don't know your calendar ids, set the debug option of the plugin to true. All availble ids will be logged. 
 
@@ -70,7 +70,6 @@ If you don't know your calendar ids, set the debug option of the plugin to true.
 
 ## ToDo
 
-* add support for multiple calendars
 * add support for rules
 * implement event colors
 * use sweetAlert2 for setup
