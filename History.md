@@ -1,5 +1,8 @@
 # Release History
 
+* 20170428 >> v0.3.8
+	* moved event pulling to seperate function
+
 * 20170426 >> v0.3.7
 	* added locale support (locale is automatically set using the pimatic local setting (default en))
 

@@ -22,10 +22,8 @@ module.exports = (env) ->
       @view = @config.view
       @firstDayOfWeek = @config.firstDayOfWeek
       @config.locale = @plugin.framework.config.settings.locale
-        
       @events = null
-      @getEvents()
-      @timers.push setInterval(@getEvents, @interval)  
+      @timers.push setInterval(@resolveEvents(), @interval)  
       super(@config)
 
     destroy: () ->
@@ -33,7 +31,7 @@ module.exports = (env) ->
         clearInterval timerId
       super()
 
-    getEvents: () => 
+    resolveEvents: () =>      
       @events = @plugin.getEvents(@calendar_id).then( (events) =>
         @e = []
         for event in events
@@ -50,5 +48,8 @@ module.exports = (env) ->
               end = event.end.dateTime
             @e.push {title: "#{event.summary}", start: "#{start}", end: "#{end}"}
         @e
-      )  
+      )
+      @getEvents()
+
+    getEvents: () =>          
       Promise.resolve(@events)
