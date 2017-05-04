@@ -1,5 +1,8 @@
 # Release History
 
+* 20170504 >> v0.4.1
+	* updated error logging
+
 * 20170428 >> v0.4.0
 	* added support for multiple calendars
 	* updated README.md

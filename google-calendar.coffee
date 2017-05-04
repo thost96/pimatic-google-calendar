@@ -26,7 +26,6 @@ module.exports = (env) ->
           mobileFrontend.registerAssetFile 'js', "pimatic-google-calendar/ui/src/locale-all.js"
           mobileFrontend.registerAssetFile 'css', "pimatic-google-calendar/ui/src/fullcalendar.min.css"
           mobileFrontend.registerAssetFile 'css', "pimatic-google-calendar/ui/styles.css"          
-          #Device class
           mobileFrontend.registerAssetFile 'js', "pimatic-google-calendar/ui/CalendarDevice.coffee"
           mobileFrontend.registerAssetFile 'html', "pimatic-google-calendar/ui/CalendarDevice.html"
         else
@@ -96,10 +95,7 @@ module.exports = (env) ->
           calendar.colors.get {
             auth: @oauth2client
           }, (err, colors) =>
-            if err
-              env.logger.error err
-              reject err
-            else
+            if !err
               env.logger.debug colors
               resolve colors
       )
@@ -112,10 +108,7 @@ module.exports = (env) ->
             auth: @oauth2client
             showDeleted: false
           }, (err, calendars) =>
-            if err
-              env.logger.error err
-              reject err
-            else
+            if !err
               ids = []
               for calendar in calendars.items
                 ids.push calendar.id
@@ -131,10 +124,7 @@ module.exports = (env) ->
             auth: @oauth2client
             showDeleted: false
           }, (err, events) =>
-            if err
-              env.logger.error err
-              reject err
-            else
+            if !err
               resolve events.items
       )
 
