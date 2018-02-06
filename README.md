@@ -2,6 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/pimatic-google-calendar.svg)](http://badge.fury.io/js/pimatic-google-calendar)
 [![dependencies status](https://david-dm.org/thost96/pimatic-google-calendar/status.svg)](https://david-dm.org/thost96/pimatic-google-calendar)
+[![Build Status](https://travis-ci.org/thost96/pimatic-google-calendar.svg?branch=master)](https://travis-ci.org/thost96/pimatic-google-calendar)
 
 A pimatic plugin to display and interact with your google calendar.
 
