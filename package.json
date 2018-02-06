@@ -14,7 +14,7 @@
     "LICENSE.md",
     "README.md"
   ],
-  "version": "0.4.1",
+  "version": "0.4.2",
   "license": "GPL-2.0",
   "homepage": "http://github.com/thost96/pimatic-google-calendar",
   "repository": {
@@ -23,7 +23,7 @@
   },
   "configSchema": "google-calendar-config-schema.coffee",
   "dependencies": {
-    "googleapis": "^19.0.0"
+    "googleapis": "^25.0.0"
   },
   "peerDependencies": {
     "pimatic": ">=0.8.0 <1.0.0"
