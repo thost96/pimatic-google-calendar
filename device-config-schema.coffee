@@ -25,11 +25,7 @@ module.exports = {
         default: "H:mm"
       firstDayOfWeek:
         type: "string"
-        default: "sunday"
+        default: "monday"
         enum: ["sunday", "monday"]
-      locale:
-        type: "string"
-        description: "automatically set to pimatic locale via plugin"
-        required: false
     }
 }

@@ -21,7 +21,7 @@ module.exports = (env) ->
       @timeFormat = @config.timeFormat 
       @view = @config.view
       @firstDayOfWeek = @config.firstDayOfWeek
-      @config.locale = @plugin.framework.config.settings.locale
+      @locale = @plugin.framework.config.settings.locale
       @calendar_ids = @config.calendar_ids || ["primary"] 
       @events = null
       @resolveEvents()
@@ -36,6 +36,7 @@ module.exports = (env) ->
     resolveEvents: () => 
       @e = []
       for @calendar_id in @calendar_ids
+        #console.log _.trim(@calendar_id)
         @events = @plugin.getEvents(_.trim(@calendar_id)).then( (events) =>          
           for event in events
             if event.status is 'confirmed'            

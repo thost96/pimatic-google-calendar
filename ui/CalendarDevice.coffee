@@ -18,7 +18,7 @@ $(document).on( "templateinit", (event) ->
       switch @firstDayOfWeek
         when "sunday" then (Number) @firstDay = 0
         when "monday" then (Number) @firstDay = 1
-      @locale = @device.config.locale
+      @locale = @device.locale
 
       attribute = @getAttribute("events")
       @events = ko.observable attribute.value()

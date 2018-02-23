@@ -15,11 +15,15 @@ module.exports = {
       type: "string"
       required: true
     access_token:
-      description: " "
+      description: "auto generated access token for your google account"
       type: "string"
       required: false
     refresh_token:
-      description: " "
+      description: "auto generated refresh token for your google account"
       type: "string"
+      required: false
+    expiry_date:
+      description: "auto generated expiry date"
+      type: "number"
       required: false
 }
