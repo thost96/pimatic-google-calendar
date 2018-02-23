@@ -11,7 +11,7 @@ A pimatic plugin to display, interact and build rules with your **Google** Calen
 ## Setup 
 1. Create your own project with OAuth 2.0 credentials by following these [instructions](https://developers.google.com/api-client-library/javascript/start/start-js#Getkeysforyourapplication)
 
-> If you are running on a private IP address that the Google service cannot reach, please configure the authorized Redirect URIs of your app to include the following url: `http://pimatic.example.com/google-credentials/auth/callback` You will need to edit your [hosts file](https://en.wikipedia.org/wiki/Hosts_(file)) and add an entry for pimatic.example.com that points to your local pimatic ip address.
+> If you are running on a private IP address that the Google service cannot reach, please configure the authorized Redirect URIs of your app to include the following url: `http://pimatic.example.com/google/auth/callback` You will need to edit your [hosts file](https://en.wikipedia.org/wiki/Hosts_(file)) and add an entry for pimatic.example.com that points to your local pimatic ip address.
 
 2. Copy the credentials to the config of the pimatic-google-calendar plugin
 3. Restart Pimatic 
